@@ -595,6 +595,11 @@ body.light-theme .sun-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform var(--transition-normal);
+}
+
+.avatar-glow-wrapper:hover {
+    transform: scale(1.03);
 }
 
 .avatar-ring-outer {
@@ -627,36 +632,21 @@ body.light-theme .sun-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.avatar-container:hover .avatar-img {
-    transform: scale(1.05);
-}
-
-/* Styled Initials Placeholder for Avatar */
-.avatar-placeholder {
-    width: 100%;
-    height: 100%;
     background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.avatar-placeholder span {
+.avatar-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 4rem;
+    font-size: 4.5rem;
     font-weight: 800;
     color: #ffffff;
     letter-spacing: -0.05em;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: transform var(--transition-normal);
+}
+
+.avatar-container:hover .avatar-text {
+    transform: scale(1.08);
 }
 
 .scroll-indicator {

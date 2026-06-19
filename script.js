@@ -191,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'footer-brand-text': 'Kiến tạo ứng dụng di động thực tiễn cho người dùng và doanh nghiệp.',
             'footer-links-title': 'Điều hướng nhanh',
             'footer-copy': '&copy; 2026 Đinh Hoàng Cước. Mọi quyền được bảo lưu.',
-            'footer-subtext': 'Thiết kế bởi Antigravity.',
             
             'form-submitting': 'Đang gửi...',
             'form-submit-success': 'Gửi thành công!',
@@ -439,7 +438,6 @@ VI. DỰ ÁN HỌC TẬP NỔI BẬT
             'footer-brand-text': 'Creating practical mobile applications for users and businesses.',
             'footer-links-title': 'Quick Links',
             'footer-copy': '&copy; 2026 Dinh Hoang Cuoc. All rights reserved.',
-            'footer-subtext': 'Designed by Antigravity.',
             
             'form-submitting': 'Sending...',
             'form-submit-success': 'Sent!',
