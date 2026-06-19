@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio cá nhân của Đinh Hoàng Cước - Sinh viên chuyên ngành Phát triển Ứng dụng Di động tại Cao đẳng Công nghệ Thủ Đức.">
+    <meta name="keywords" content="Đinh Hoàng Cước, Mobile Developer, Android Developer, Kotlin, Flutter, Portfolio, CV, Lập trình di động, Cao đẳng Công nghệ Thủ Đức">
+    <meta name="author" content="Đinh Hoàng Cước">
+    <meta property="og:title" content="Đinh Hoàng Cước | Mobile Application Development Student Portfolio">
+    <meta property="og:description" content="Portfolio cá nhân của Đinh Hoàng Cước - Sinh viên năm cuối chuyên ngành Phát triển Ứng dụng Di động.">
+    <meta property="og:image" content="avatar.png">
+    <meta property="og:type" content="website">
+    <title>Đinh Hoàng Cước | Mobile Application Development Student Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Ambient light glow element -->
+    <div class="ambient-glow" id="ambientGlow"></div>
+
+    <!-- Sticky Glass Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">DHC<span class="logo-dot">.</span></a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#home" class="nav-link active" data-i18n="nav-home">Trang Chủ</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav-about">Giới Thiệu</a></li>
+                    <li><a href="#education" class="nav-link" data-i18n="nav-education">Học Vấn</a></li>
+                    <li><a href="#skills" class="nav-link" data-i18n="nav-skills">Kỹ Năng</a></li>
+                    <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Kinh Nghiệm</a></li>
+                    <li><a href="#projects" class="nav-link" data-i18n="nav-projects">Dự Án</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Liên Hệ</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Language Selector -->
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-btn" id="langBtn" aria-label="Select Language">
+                        <i data-lucide="globe" class="lang-icon"></i>
+                        <span class="lang-text-label" data-i18n="nav-lang-label">Language</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </button>
+                    <div class="dropdown-content glass-card" id="langDropdown">
+                        <button class="dropdown-item active" data-lang="vi">🇻🇳 Tiếng Việt</button>
+                        <button class="dropdown-item" data-lang="en">🇺🇸 English</button>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">
+                    <i data-lucide="moon" class="toggle-icon moon-icon"></i>
+                    <i data-lucide="sun" class="toggle-icon sun-icon"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content reveal">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span data-i18n="hero-badge">Sinh viên năm cuối IT</span>
+                </div>
+                <h1 class="hero-title" data-i18n="hero-title">
+                    Xin chào, tôi là<br>
+                    <span class="text-gradient">Đinh Hoàng Cước</span>
+                </h1>
+                <h2 class="hero-subtitle" data-i18n="hero-subtitle">Mobile Application Development Student</h2>
+                <p class="hero-description" data-i18n="hero-desc">
+                    Sinh viên năm cuối ngành Công nghệ thông tin tại Cao đẳng Công nghệ Thủ Đức. Tập trung học tập và thực hành phát triển ứng dụng di động trên nền tảng Android (Kotlin/Java) và Flutter.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2005</span>
+                        <span class="stat-label" data-i18n="hero-stat-birth">Năm sinh</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">7+</span>
+                        <span class="stat-label" data-i18n="hero-stat-projects">Dự án học tập</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0937...</span>
+                        <span class="stat-label" data-i18n="hero-stat-hotline">Hotline</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <span data-i18n="btn-contact">Liên Hệ Ngay</span> <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-secondary" id="downloadCVBtn">
+                        <span data-i18n="btn-download">Tải CV (TXT)</span> <i data-lucide="download"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-avatar-area reveal">
+                <div class="avatar-glow-wrapper">
+                    <div class="avatar-ring-outer"></div>
+                    <div class="avatar-ring-inner"></div>
+                    <div class="avatar-container">
+                        <img src="avatar.png" alt="Đinh Hoàng Cước - Mobile Application Development Student" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="avatar-placeholder" style="display: none;">
+                            <span>DHC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="mouse">
+                <span class="wheel"></span>
+            </span>
+            <span class="scroll-text" data-i18n="hero-scroll">Cuộn xuống để xem tiếp</span>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="about-subtitle">Profile</span>
+                <h2 class="section-title" data-i18n="about-title">Giới Thiệu Bản Thân</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-info-card glass-card reveal">
+                    <div class="info-card-header">
+                        <i data-lucide="user" class="info-icon text-gradient-icon"></i>
+                        <h3 data-i18n="about-info-header">Thông tin cá nhân</h3>
+                    </div>
+                    <ul class="personal-info-list">
+                        <li>
+                            <span class="info-label" data-i18n="about-info-name">Họ và Tên</span>
+                            <span class="info-value" data-i18n="about-info-name-val">Đinh Hoàng Cước</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="about-info-dob">Ngày sinh</span>
+                            <span class="info-value">01/01/2005</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="about-info-location">Địa chỉ</span>
+                            <span class="info-value" data-i18n="about-info-location-val">Dĩ An, Bình Dương, Việt Nam</span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="about-info-email">Email</span>
+                            <span class="info-value"><a href="mailto:cuoc2004@gmail.com">cuoc2004@gmail.com</a></span>
+                        </li>
+                        <li>
+                            <span class="info-label" data-i18n="about-info-phone">Điện thoại</span>
+                            <span class="info-value"><a href="tel:0937397516">0937 397 516</a></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="goals-wrapper">
+                    <div class="goal-card glass-card reveal">
+                        <div class="goal-icon-box cyan-glow">
+                            <i data-lucide="target" class="goal-icon"></i>
+                        </div>
+                        <div class="goal-content">
+                            <h3 data-i18n="about-goal-short-title">Mục tiêu ngắn hạn</h3>
+                            <p data-i18n="about-goal-short-desc">Trở thành Mobile Application Developer, tiếp tục rèn luyện kỹ năng lập trình và tích lũy thêm nhiều kinh nghiệm thực tế thông qua các dự án phát triển phần mềm.</p>
+                        </div>
+                    </div>
+
+                    <div class="goal-card glass-card reveal">
+                        <div class="goal-icon-box purple-glow">
+                            <i data-lucide="compass" class="goal-icon"></i>
+                        </div>
+                        <div class="goal-content">
+                            <h3 data-i18n="about-goal-long-title">Mục tiêu dài hạn</h3>
+                            <p data-i18n="about-goal-long-desc">Tập trung phát triển các ứng dụng di động chất lượng cao, mang lại giá trị sử dụng cho người dùng cuối cùng và hỗ trợ các hoạt động vận hành của doanh nghiệp.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="edu-subtitle">Credentials</span>
+                <h2 class="section-title" data-i18n="edu-title">Học Vấn</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="education-wrapper reveal">
+                <div class="education-card glass-card">
+                    <div class="edu-glowing-backdrop"></div>
+                    <div class="edu-header">
+                        <div class="edu-institution">
+                            <div class="edu-logo-placeholder">
+                                <i data-lucide="graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h3 data-i18n="edu-inst-name">Cao đẳng Công nghệ Thủ Đức</h3>
+                                <p class="edu-major" data-i18n="edu-major">Ngành: Công nghệ thông tin</p>
+                                <p class="edu-specialization" data-i18n="edu-spec">Chuyên ngành: Phát triển Ứng dụng Di động</p>
+                            </div>
+                        </div>
+                        <div class="edu-time">
+                            <span class="badge badge-outline">2023 - 2026</span>
+                        </div>
+                    </div>
+                    <div class="edu-details">
+                        <p data-i18n="edu-desc">Đang hoàn thành chương trình học về thiết kế cấu trúc phần mềm di động, cơ sở dữ liệu quan hệ, và quy trình xây dựng ứng dụng di động native (Android) và multi-platform (Flutter).</p>
+                        <ul class="edu-highlights">
+                            <li><i data-lucide="check-circle-2"></i> <span data-i18n="edu-highlight-1">Tiếp thu kỹ năng lập trình hướng đối tượng (OOP) và thiết kế cơ sở dữ liệu.</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span data-i18n="edu-highlight-2">Thực hành xây dựng giao diện người dùng Responsive trên web và di động.</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span data-i18n="edu-highlight-3">Có kinh nghiệm làm Trưởng nhóm (Leader) điều phối các đồ án môn học.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="skills-subtitle">Skills</span>
+                <h2 class="section-title" data-i18n="skills-title">Kỹ Năng Cá Nhân</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Group 1: Mobile & Web Development -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="smartphone" class="category-icon text-blue"></i> <span data-i18n="skill-cat-1">Mobile & Web Development</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag">Android Development</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">RecyclerView</span>
+                        <span class="skill-tag">SharedPreferences</span>
+                        <span class="skill-tag">XML Layout</span>
+                        <span class="skill-tag">Fragments</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+
+                <!-- Group 2: Programming & Databases -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="database" class="category-icon text-purple"></i> <span data-i18n="skill-cat-2">Programming & Databases</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag" data-i18n="skill-tag-oop">OOP (Lập trình hướng đối tượng)</span>
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">ERD Design</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Group 3: Digital & Office Skills -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="file-text" class="category-icon text-cyan"></i> <span data-i18n="skill-cat-3">Digital & Office Skills</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag">Microsoft Word</span>
+                        <span class="skill-tag">Microsoft Excel</span>
+                        <span class="skill-tag">Microsoft PowerPoint</span>
+                        <span class="skill-tag">Google Docs</span>
+                        <span class="skill-tag">Google Sheets</span>
+                        <span class="skill-tag">Google Slides</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">CapCut</span>
+                    </div>
+                </div>
+
+                <!-- Group 4: General Computer Skills -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="laptop" class="category-icon text-blue"></i> <span data-i18n="skill-cat-4">General Computer Skills</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag" data-i18n="skill-tag-computer-1">Sử dụng máy tính nhanh nhạy</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-2">Gõ bàn phím tốt</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-3">Tìm kiếm thông tin & Tra cứu internet</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-4">Công cụ tăng hiệu suất với AI</span>
+                        <span class="skill-tag">ChatGPT</span>
+                        <span class="skill-tag">Google Gemini</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-7">Viết câu lệnh (Prompt) & Hỗ trợ quy trình làm việc</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-8">Quản lý tệp tin & Tài liệu</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-9">Tạo bài thuyết trình</span>
+                        <span class="skill-tag" data-i18n="skill-tag-computer-10">Chỉnh sửa ảnh & Video cơ bản</span>
+                    </div>
+                </div>
+
+                <!-- Group 5: Soft Skills -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="users" class="category-icon text-purple"></i> <span data-i18n="skill-cat-5">Soft Skills</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag" data-i18n="skill-tag-soft-1">Làm việc nhóm</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-2">Trưởng nhóm (Team Leadership)</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-3">Giao tiếp</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-4">Giải quyết vấn đề</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-5">Quản lý thời gian</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-6">Điều phối dự án</span>
+                        <span class="skill-tag" data-i18n="skill-tag-soft-7">Tự học & Thích ứng nhanh</span>
+                    </div>
+                </div>
+
+                <!-- Group 6: Tools & Software -->
+                <div class="skill-category-card glass-card reveal">
+                    <h3 class="category-title"><i data-lucide="wrench" class="category-icon text-cyan"></i> <span data-i18n="skill-cat-6">Tools & Software</span></h3>
+                    <div class="skill-tags-grid">
+                        <span class="skill-tag">Android Studio</span>
+                        <span class="skill-tag">Visual Studio</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">SSMS (SQL Server Management Studio)</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Firebase Console</span>
+                        <span class="skill-tag">Cisco Packet Tracer</span>
+                        <span class="skill-tag">Microsoft Visio</span>
+                        <span class="skill-tag">Draw.io (Diagrams.net)</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">CapCut</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="experience-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="exp-subtitle">Work History</span>
+                <h2 class="section-title" data-i18n="exp-title">Kinh Nghiệm Làm Việc</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2020 - 2023</div>
+                    <div class="timeline-content glass-card">
+                        <span class="timeline-badge secondary-badge" data-i18n="exp-badge">Cửa hàng tạp hóa gia đình</span>
+                        <h3 class="timeline-role" data-i18n="exp-role">Sales Assistant</h3>
+                        <p class="timeline-company" data-i18n="exp-company">Cửa hàng Kinh doanh Gia đình</p>
+                        <p class="timeline-desc" data-i18n="exp-desc">Thực hiện các công việc tư vấn khách hàng, sắp xếp hàng hóa và hỗ trợ bán hàng trực tiếp.</p>
+                        <div class="timeline-metric">
+                            <i data-lucide="trending-up" class="metric-icon"></i>
+                            <span data-i18n="exp-metric">Doanh thu đạt khoảng <strong>300 triệu VNĐ</strong> trong vòng 3 năm.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="proj-subtitle">Academic Projects</span>
+                <h2 class="section-title" data-i18n="proj-title">Dự Án Đồ Án Môn Học</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder purple-gradient-bg">
+                        <i data-lucide="film" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-leader">Leader</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-1-name">Hệ thống Quản lý Phim</h3>
+                        <p class="project-description" data-i18n="proj-1-desc">Hệ thống phân tích và quản lý thông tin rạp chiếu phim, lịch chiếu và quản lý đặt vé.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-1-bullet-1">Thiết kế sơ đồ quan hệ thực thể (ERD) cho hệ thống.</li>
+                            <li data-i18n="proj-1-bullet-2">Xây dựng cơ sở dữ liệu trên SQL Server.</li>
+                            <li data-i18n="proj-1-bullet-3">Quản lý và điều phối nhóm gồm 4 thành viên.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>SQL Server</span>
+                            <span>Database Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder blue-gradient-bg">
+                        <i data-lucide="network" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-team-leader">Team Leader</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-2-name">Dự án Mạng Máy tính</h3>
+                        <p class="project-description" data-i18n="proj-2-desc">Thiết kế sơ đồ cấu trúc logic và cấu hình hệ thống kết nối mạng máy tính theo yêu cầu đồ án môn học (Thời gian: 07/2023 - 09/2023).</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-2-bullet-1">Điều phối công việc nhóm và đảm bảo tiến độ dự án.</li>
+                            <li data-i18n="proj-2-bullet-2">Thiết kế sơ đồ cấu trúc logic (Network Topology) bằng Microsoft Visio.</li>
+                            <li data-i18n="proj-2-bullet-3">Xây dựng và cấu hình hệ thống mạng trên phần mềm Cisco Packet Tracer.</li>
+                            <li data-i18n="proj-2-bullet-4">Lập kế hoạch kết nối thiết bị và thiết lập cấu trúc mạng.</li>
+                            <li data-i18n="proj-2-bullet-5">Kiểm thử chất lượng kết nối và xác minh hoạt động của hệ thống.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>Microsoft Visio</span>
+                            <span>Cisco Packet Tracer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder cyan-gradient-bg">
+                        <i data-lucide="globe" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-leader">Leader</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-3-name">Website Google Sites</h3>
+                        <p class="project-description" data-i18n="proj-3-desc">Triển khai trang thông tin nhóm trên nền tảng Google Sites kết hợp lưu trữ tài liệu.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-3-bullet-1">Xây dựng trang web thông tin nhóm trên Google Sites.</li>
+                            <li data-i18n="proj-3-bullet-2">Phối hợp điều phối công việc nhóm với vai trò Leader.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>Google Sites</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder green-gradient-bg">
+                        <i data-lucide="package-search" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-member">Team Member</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-4-name">App Quản lý Kho Android</h3>
+                        <p class="project-description" data-i18n="proj-4-desc">Ứng dụng hỗ trợ ghi chép dữ liệu xuất nhập và kiểm tra hàng tồn kho trên thiết bị Android.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-4-bullet-1">Xây dựng các chức năng quản lý sản phẩm cơ bản (CRUD).</li>
+                            <li data-i18n="proj-4-bullet-2">Lập trình chức năng tìm kiếm sản phẩm.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>Android SDK</span>
+                            <span>Java</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder pink-gradient-bg">
+                        <i data-lucide="shopping-bag" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-member">Team Member</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-5-name">App Cửa hàng Quần áo (Mobile Dev 3)</h3>
+                        <p class="project-description" data-i18n="proj-5-desc">Ứng dụng mua sắm thời trang trực tuyến tích hợp cơ sở dữ liệu thời gian thực.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-5-bullet-1">Phát triển các mô-đun: Thông tin tài khoản (Profile) và Sản phẩm yêu thích (Wishlist).</li>
+                            <li data-i18n="proj-5-bullet-2">Tối ưu hóa hiển thị danh sách sản phẩm bằng RecyclerView.</li>
+                            <li data-i18n="proj-5-bullet-3">Tích hợp dữ liệu Firebase và lưu trữ dữ liệu cục bộ qua SharedPreferences.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>Kotlin</span>
+                            <span>Firebase</span>
+                            <span>RecyclerView</span>
+                            <span>SharedPreferences</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 (Suggested Mobile Dev 2) -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder orange-gradient-bg">
+                        <i data-lucide="clipboard-list" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-member">Team Member</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-6-name">App Quản lý Công việc (Mobile Dev 2)</h3>
+                        <p class="project-description" data-i18n="proj-6-desc">Ứng dụng lập lịch và ghi chép công việc cá nhân hàng ngày với lưu trữ dữ liệu offline.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-6-bullet-1">Thiết kế cấu trúc bảng cơ sở dữ liệu SQLite trong ứng dụng.</li>
+                            <li data-i18n="proj-6-bullet-2">Lập trình các lớp hỗ trợ kết nối dữ liệu (SQLiteOpenHelper).</li>
+                            <li data-i18n="proj-6-bullet-3">Xây dựng các chức năng CRUD và hiển thị danh mục công việc trên RecyclerView.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>Android SDK</span>
+                            <span>Java</span>
+                            <span>SQLite</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7 (Suggested WinForms Project) -->
+                <div class="project-card glass-card reveal">
+                    <div class="project-image-placeholder red-gradient-bg">
+                        <i data-lucide="monitor" class="project-illustration-icon"></i>
+                        <span class="project-role-badge" data-i18n="proj-role-member">Team Member</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name" data-i18n="proj-7-name">Ứng dụng Quản lý Học sinh (WinForms)</h3>
+                        <p class="project-description" data-i18n="proj-7-desc">Phần mềm quản lý hồ sơ học sinh, điểm số và lớp học chạy trên môi trường Windows Desktop.</p>
+                        <ul class="project-bullet-list">
+                            <li data-i18n="proj-7-bullet-1">Thiết kế giao diện quản lý học sinh trên môi trường Windows Forms.</li>
+                            <li data-i18n="proj-7-bullet-2">Cấu hình kết nối dữ liệu từ C# tới cơ sở dữ liệu SQL Server qua ADO.NET.</li>
+                        </ul>
+                        <div class="project-tags">
+                            <span>C#</span>
+                            <span>WinForms</span>
+                            <span>SQL Server</span>
+                            <span>ADO.NET</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub & Social Links Section -->
+    <section id="socials" class="socials-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="social-subtitle">Connections</span>
+                <h2 class="section-title" data-i18n="social-title">Liên Kết Mạng Xã Hội</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="social-cards-grid reveal">
+                <!-- GitHub Card -->
+                <a href="https://github.com/cuocvn" target="_blank" rel="noopener noreferrer" class="social-card-item glass-card">
+                    <div class="social-card-icon github-bg">
+                        <i data-lucide="github"></i>
+                    </div>
+                    <div class="social-card-info">
+                        <h3>GitHub</h3>
+                        <p>@cuocvn</p>
+                        <span class="social-action-text"><span data-i18n="social-gh-action">Xem mã nguồn dự án</span> <i data-lucide="external-link"></i></span>
+                    </div>
+                </a>
+
+                <!-- Facebook Card -->
+                <a href="https://www.facebook.com/hoang.cuoc.308405" target="_blank" rel="noopener noreferrer" class="social-card-item glass-card">
+                    <div class="social-card-icon facebook-bg">
+                        <i data-lucide="facebook"></i>
+                    </div>
+                    <div class="social-card-info">
+                        <h3>Facebook</h3>
+                        <p>Đinh Hoàng Cước</p>
+                        <span class="social-action-text"><span data-i18n="social-fb-action">Kết nối với tôi</span> <i data-lucide="external-link"></i></span>
+                    </div>
+                </a>
+
+                <!-- TikTok Card -->
+                <a href="https://www.tiktok.com/@hc1512" target="_blank" rel="noopener noreferrer" class="social-card-item glass-card">
+                    <div class="social-card-icon tiktok-bg">
+                        <!-- Custom Lucide approximation or simple text/icon -->
+                        <i data-lucide="music-4"></i>
+                    </div>
+                    <div class="social-card-info">
+                        <h3>TikTok</h3>
+                        <p>@hc1512</p>
+                        <span class="social-action-text"><span data-i18n="social-tt-action">Theo dõi kênh cá nhân</span> <i data-lucide="external-link"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle" data-i18n="contact-subtitle">Get in touch</span>
+                <h2 class="section-title" data-i18n="contact-title">Thông Tin Liên Hệ</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact info cards -->
+                <div class="contact-info reveal">
+                    <div class="contact-detail-card glass-card">
+                        <div class="contact-icon-box">
+                            <i data-lucide="phone"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="contact-phone-label">Điện thoại</h4>
+                            <p><a href="tel:0937397516">0937 397 516</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail-card glass-card">
+                        <div class="contact-icon-box">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="contact-email-label">Email</h4>
+                            <p><a href="mailto:cuoc2004@gmail.com">cuoc2004@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail-card glass-card">
+                        <div class="contact-icon-box">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="contact-address-label">Địa chỉ</h4>
+                            <p data-i18n="contact-address-val">Dĩ An, Bình Dương, Việt Nam</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact form -->
+                <div class="contact-form-wrapper glass-card reveal">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="formName" class="form-label" data-i18n="contact-form-name">Họ và tên</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="user" class="input-icon"></i>
+                                <input type="text" id="formName" name="name" class="form-input" placeholder="Nguyễn Văn A" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formEmail" class="form-label" data-i18n="contact-form-email">Email liên hệ</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="mail" class="input-icon"></i>
+                                <input type="email" id="formEmail" name="email" class="form-input" placeholder="nguyenvana@gmail.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formSubject" class="form-label" data-i18n="contact-form-subject">Tiêu đề</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="hash" class="input-icon"></i>
+                                <input type="text" id="formSubject" name="subject" class="form-input" placeholder="Hợp tác, công việc..." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formMessage" class="form-label" data-i18n="contact-form-msg">Tin nhắn</label>
+                            <div class="input-wrapper message-wrapper">
+                                <i data-lucide="message-square" class="input-icon message-icon"></i>
+                                <textarea id="formMessage" name="message" class="form-input form-textarea" placeholder="Lời nhắn của bạn..." required></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit" id="formSubmitBtn">
+                            <span data-i18n="btn-submit">Gửi Lời Nhắn</span> <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#home" class="footer-logo">DHC<span>.</span></a>
+                <p data-i18n="footer-brand-text">Kiến tạo ứng dụng di động thực tiễn cho người dùng và doanh nghiệp.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 data-i18n="footer-links-title">Điều hướng nhanh</h4>
+                <ul>
+                    <li><a href="#home" data-i18n="nav-home">Trang Chủ</a></li>
+                    <li><a href="#about" data-i18n="nav-about">Giới Thiệu</a></li>
+                    <li><a href="#skills" data-i18n="nav-skills">Kỹ Năng</a></li>
+                    <li><a href="#projects" data-i18n="nav-projects">Dự Án</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-copyright">
+                <p data-i18n="footer-copy">&copy; 2026 Đinh Hoàng Cước. Mọi quyền được bảo lưu.</p>
+                <p class="footer-subtext" data-i18n="footer-subtext">Thiết kế bởi Antigravity.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content glass-card">
+            <div class="modal-icon-box">
+                <i data-lucide="check-circle" class="modal-icon"></i>
+            </div>
+            <h3 data-i18n="modal-success-title">Gửi thành công!</h3>
+            <p data-i18n="modal-success-desc">Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi tin nhắn trong thời gian sớm nhất.</p>
+            <button class="btn btn-primary" id="modalCloseBtn" data-i18n="modal-success-close">Đóng</button>
+        </div>
+    </div>
+
+    <!-- EmailJS SDK CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Script file -->
+    <script src="script.js"></script>
+</body>
+</html>
