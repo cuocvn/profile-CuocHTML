@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    PREMIUM PORTFOLIO INTERACTIVITY SCRIPT
    Includes: Theme Toggle, Mouse Spotlight, Mobile Menu, Active Scrollspy,
              Scroll Animation Observer, Dynamic CV Download, Form Validation
@@ -539,6 +539,66 @@ Dinh Hoang Cuoc - 2026
         }
     };
 
+    // --- Typing Animation System ---
+    const typingTextEl = document.getElementById('typingText');
+    const typingPhrases = {
+        vi: [
+            'Sinh viên Công nghệ Thông tin',
+            'Lập trình viên Ứng dụng Di động',
+            'Nhà phát triển Android',
+            'Đam mê Công nghệ và Phần mềm'
+        ],
+        en: [
+            'Information Technology Student',
+            'Mobile Application Developer',
+            'Android Developer',
+            'Passionate About Software Development'
+        ]
+    };
+    
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+    let typingActivePhrases = typingPhrases['vi'];
+    let typingTimer = null;
+
+    function type() {
+        if (!typingTextEl) return;
+        
+        const currentFullPhrase = typingActivePhrases[currentPhraseIndex];
+        
+        if (isDeleting) {
+            typingTextEl.textContent = currentFullPhrase.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            typingSpeed = 50;
+        } else {
+            typingTextEl.textContent = currentFullPhrase.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
+            typingSpeed = 100;
+        }
+
+        if (!isDeleting && currentCharIndex === currentFullPhrase.length) {
+            typingSpeed = 1800;
+            isDeleting = true;
+        } else if (isDeleting && currentCharIndex === 0) {
+            isDeleting = false;
+            currentPhraseIndex = (currentPhraseIndex + 1) % typingActivePhrases.length;
+            typingSpeed = 500;
+        }
+
+        typingTimer = setTimeout(type, typingSpeed);
+    }
+
+    function updateTypingPhrases(lang) {
+        if (typingTimer) clearTimeout(typingTimer);
+        typingActivePhrases = typingPhrases[lang] || typingPhrases['vi'];
+        currentPhraseIndex = 0;
+        currentCharIndex = 0;
+        isDeleting = false;
+        type();
+    }
+
     // --- Language Translation Engine ---
     function setLanguage(lang) {
         const t = translations[lang];
@@ -567,6 +627,10 @@ Dinh Hoang Cuoc - 2026
         if (formMessage) formMessage.placeholder = t['placeholder-message'];
 
         localStorage.setItem('language', lang);
+
+        if (typeof updateTypingPhrases === 'function') {
+            updateTypingPhrases(lang);
+        }
 
         langOptions.forEach(opt => {
             if (opt.getAttribute('data-lang') === lang) {
@@ -833,4 +897,550 @@ Dinh Hoang Cuoc - 2026
             successModal.classList.remove('active');
         }
     });
+
+    // ==========================================================================
+    // PREMIUM JS INTERACTIONS
+    // ==========================================================================
+
+    // --- 1. Preloader Progress & Fade Out ---
+    const preloader = document.getElementById('preloader');
+    const preloaderBar = document.getElementById('preloaderBar');
+    
+    if (preloader && preloaderBar) {
+        document.body.style.overflow = 'hidden'; // disable scroll while loading
+        
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += Math.floor(Math.random() * 15) + 5;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(progressInterval);
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.style.overflow = ''; // restore scrolling
+                }, 300);
+            }
+            preloaderBar.style.width = progress + '%';
+        }, 30);
+    }
+
+    // --- 2. Scroll Progress Indicator ---
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    if (scrollProgressBar) {
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (height > 0) {
+                const scrolled = (winScroll / height) * 100;
+                scrollProgressBar.style.width = scrolled + '%';
+            } else {
+                scrollProgressBar.style.width = '0%';
+            }
+        });
+    }
+
+    // --- 3. Stats Counters on Scroll ---
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const targetVal = parseInt(target.getAttribute('data-target'), 10);
+                const prefix = target.getAttribute('data-prefix') || '';
+                const suffix = target.getAttribute('data-suffix') || '';
+                let currentVal = 0;
+                const duration = 1500; // 1.5 seconds animation
+                const startTime = performance.now();
+                
+                function updateCount(timestamp) {
+                    const elapsed = timestamp - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease out cubic
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    currentVal = Math.floor(easeProgress * targetVal);
+                    
+                    target.textContent = prefix + currentVal + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        target.textContent = prefix + targetVal + suffix;
+                    }
+                }
+                
+                requestAnimationFrame(updateCount);
+                observer.unobserve(target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(stat => counterObserver.observe(stat));
+
+    // --- 4. Card Mouse Spotlight Effect ---
+    const spotlightCards = document.querySelectorAll('.project-card, .skill-card, .contact-card');
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // --- 5. Timeline Progress Connector Line ---
+    const timelineContainer = document.querySelector('.timeline-container');
+    if (timelineContainer) {
+        const progressLine = document.createElement('div');
+        progressLine.className = 'timeline-line-progress';
+        timelineContainer.appendChild(progressLine);
+
+        window.addEventListener('scroll', () => {
+            const rect = timelineContainer.getBoundingClientRect();
+            const viewHeight = window.innerHeight;
+            const triggerPoint = viewHeight * 0.7;
+            const containerHeight = rect.height;
+            const containerTop = rect.top;
+            
+            let scrolledDistance = triggerPoint - containerTop;
+            if (scrolledDistance < 0) scrolledDistance = 0;
+            if (scrolledDistance > containerHeight) scrolledDistance = containerHeight;
+            
+            const progressPercent = (scrolledDistance / containerHeight) * 100;
+            progressLine.style.height = progressPercent + '%';
+        });
+    }
+
+    // --- 6. Animated Project Details Modal ---
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectModal = document.getElementById('projectModal');
+    const modalProjTitle = document.getElementById('modalProjTitle');
+    const modalProjDesc = document.getElementById('modalProjDesc');
+    const modalProjRole = document.getElementById('modalProjRole');
+    const modalProjTech = document.getElementById('modalProjTech');
+    const modalProjBullets = document.getElementById('modalProjBullets');
+    const modalProjIcon = document.getElementById('modalProjIcon');
+    const projectModalCloseBtn = document.getElementById('projectModalCloseBtn');
+
+    if (projectModal && projectCards.length > 0) {
+        projectCards.forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.project-name').textContent;
+                const desc = card.querySelector('.project-description').textContent;
+                const role = card.querySelector('.project-role-badge').textContent;
+                
+                const iconSVG = card.querySelector('.project-illustration-icon');
+                const iconHTML = iconSVG ? iconSVG.outerHTML : '';
+                
+                const tags = Array.from(card.querySelectorAll('.project-tags span')).map(span => span.textContent);
+                const bullets = Array.from(card.querySelectorAll('.project-bullet-list li')).map(li => li.textContent);
+
+                modalProjTitle.textContent = title;
+                modalProjDesc.textContent = desc;
+                modalProjRole.textContent = role;
+                if (modalProjIcon) modalProjIcon.innerHTML = iconHTML;
+
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+
+                if (modalProjTech) {
+                    modalProjTech.innerHTML = '';
+                    tags.forEach(tag => {
+                        const span = document.createElement('span');
+                        span.textContent = tag;
+                        modalProjTech.appendChild(span);
+                    });
+                }
+
+                if (modalProjBullets) {
+                    modalProjBullets.innerHTML = '';
+                    bullets.forEach(bullet => {
+                        const li = document.createElement('li');
+                        li.textContent = bullet;
+                        modalProjBullets.appendChild(li);
+                    });
+                }
+
+                projectModal.style.display = 'flex';
+                setTimeout(() => {
+                    projectModal.classList.add('open');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeProjModal = () => {
+            projectModal.classList.remove('open');
+            setTimeout(() => {
+                projectModal.style.display = 'none';
+                if (!terminalModal.classList.contains('open')) {
+                    document.body.style.overflow = '';
+                }
+            }, 300);
+        };
+
+        if (projectModalCloseBtn) {
+            projectModalCloseBtn.addEventListener('click', closeProjModal);
+        }
+
+        projectModal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-backdrop') || e.target === projectModal) {
+                closeProjModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectModal.classList.contains('open')) {
+                closeProjModal();
+            }
+        });
+    }
+
+    // --- 7. Floating Background Particles System ---
+    const particlesContainer = document.getElementById('particlesContainer');
+    if (particlesContainer) {
+        const particleCount = 15;
+        const particles = [];
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 80 + 40;
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const opacity = Math.random() * 0.1 + 0.05;
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.opacity = opacity;
+            
+            particlesContainer.appendChild(particle);
+            
+            particles.push({
+                el: particle,
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: size
+            });
+        }
+
+        function updateParticles() {
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < -p.size) p.x = window.innerWidth;
+                if (p.x > window.innerWidth) p.x = -p.size;
+                if (p.y < -p.size) p.y = window.innerHeight;
+                if (p.y > window.innerHeight) p.y = -p.size;
+
+                p.el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
+            });
+            requestAnimationFrame(updateParticles);
+        }
+
+        updateParticles();
+
+        window.addEventListener('resize', () => {
+            particles.forEach(p => {
+                if (p.x > window.innerWidth) p.x = Math.random() * window.innerWidth;
+                if (p.y > window.innerHeight) p.y = Math.random() * window.innerHeight;
+            });
+        });
+    }
+
+    // --- 8. Cyberpunk Developer Mode Terminal ---
+    const terminalModal = document.getElementById('terminalModal');
+    const terminalToggleBtn = document.getElementById('terminalToggleBtn');
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalOutput = document.getElementById('terminalOutput');
+    const terminalForm = document.getElementById('terminalForm');
+    const terminalBody = document.getElementById('terminalBody');
+
+    if (terminalModal && terminalToggleBtn) {
+        const toggleTerminal = () => {
+            if (terminalModal.style.display === 'none') {
+                terminalModal.style.display = 'flex';
+                setTimeout(() => {
+                    terminalModal.classList.add('open');
+                    if (terminalInput) {
+                        terminalInput.value = '';
+                        terminalInput.focus();
+                    }
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                closeTerminal();
+            }
+        };
+
+        const closeTerminal = () => {
+            terminalModal.classList.remove('open');
+            setTimeout(() => {
+                terminalModal.style.display = 'none';
+                if (!projectModal.classList.contains('open')) {
+                    document.body.style.overflow = '';
+                }
+            }, 300);
+        };
+
+        terminalToggleBtn.addEventListener('click', toggleTerminal);
+
+        const closeDots = terminalModal.querySelector('.dot-close');
+        if (closeDots) {
+            closeDots.addEventListener('click', closeTerminal);
+        }
+
+        terminalModal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('terminal-backdrop') || e.target === terminalModal) {
+                closeTerminal();
+            }
+        });
+
+        if (terminalBody) {
+            terminalBody.addEventListener('click', (e) => {
+                if (e.target !== terminalInput) {
+                    terminalInput.focus();
+                }
+            });
+        }
+
+        if (terminalForm && terminalInput && terminalOutput) {
+            terminalForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const cmdText = terminalInput.value.trim().toLowerCase();
+                terminalInput.value = '';
+
+                if (!cmdText) return;
+
+                const echoLine = document.createElement('p');
+                echoLine.className = 'term-info-line';
+                echoLine.innerHTML = `<span class="terminal-prompt">dhc@dev:~$&nbsp;</span><span class="term-cmd">${escapeHTML(cmdText)}</span>`;
+                terminalOutput.appendChild(echoLine);
+
+                processCommand(cmdText);
+
+                if (terminalBody) {
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                }
+            });
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        const terminalTranslations = {
+            vi: {
+                help: `Có sẵn các lệnh sau:<br>
+                       - <span class="term-highlight">help</span>: Hiển thị các lệnh<br>
+                       - <span class="term-highlight">about</span>: Thông tin bản thân<br>
+                       - <span class="term-highlight">skills</span>: Danh sách kỹ năng lập trình<br>
+                       - <span class="term-highlight">projects</span>: Danh sách dự án tiêu biểu<br>
+                       - <span class="term-highlight">theme</span>: Đổi giao diện Sáng/Tối<br>
+                       - <span class="term-highlight">clear</span>: Xóa màn hình terminal<br>
+                       - <span class="term-highlight">exit</span>: Đóng terminal`,
+                about: `Họ tên: Đinh Hoàng Cước<br>
+                        Vai trò: Sinh viên chuyên ngành Phát triển Ứng dụng Di động<br>
+                        Học vấn: Cao đẳng Công nghệ Thủ Đức (2023 - 2026)<br>
+                        Mục tiêu: Trở thành một lập trình viên di động thực tiễn.`,
+                skills: `Kỹ năng nổi bật:<br>
+                         - Mobile: Android (Kotlin/Java), Flutter<br>
+                         - Database: SQL Server, SQLite, Firebase<br>
+                         - General: OOP, C#, Git, HTML/CSS/JS`,
+                projects: `Dự án tiêu biểu:<br>
+                           1. Hệ thống Quản lý Phim (SQL Server/ERD Design)<br>
+                           2. Dự án Mạng Máy tính (Visio/Packet Tracer)<br>
+                           3. App Quản lý Kho Android (SQLite/CRUD)<br>
+                           4. App Cửa hàng Quần áo (Kotlin/Firebase)<br>
+                           5. App Quản lý Công việc (SQLite/RecyclerView)`,
+                error: `Không tìm thấy lệnh: "<span class="term-error">\${cmd}</span>". Nhập <span class="term-highlight">help</span> để xem các lệnh.`,
+                themeChanged: `<span class="term-success">Đã chuyển đổi giao diện thành công!</span>`
+            },
+            en: {
+                help: `Available commands:<br>
+                       - <span class="term-highlight">help</span>: Show help commands<br>
+                       - <span class="term-highlight">about</span>: Personal profile summary<br>
+                       - <span class="term-highlight">skills</span>: Programming skills details<br>
+                       - <span class="term-highlight">projects</span>: Academic projects list<br>
+                       - <span class="term-highlight">theme</span>: Toggle Light/Dark mode<br>
+                       - <span class="term-highlight">clear</span>: Clear terminal screen<br>
+                       - <span class="term-highlight">exit</span>: Close terminal`,
+                about: `Name: Dinh Hoang Cuoc<br>
+                        Role: Mobile Application Development Student<br>
+                        Education: Thu Duc College of Technology (2023 - 2026)<br>
+                        Objective: Become a pragmatic mobile software developer.`,
+                skills: `Core Skills:<br>
+                         - Mobile: Android (Kotlin/Java), Flutter<br>
+                         - Database: SQL Server, SQLite, Firebase<br>
+                         - General: OOP, C#, Git, HTML/CSS/JS`,
+                projects: `Featured Projects:<br>
+                           1. Movie Management System (SQL Server/ERD Design)<br>
+                           2. Computer Network Project (Visio/Packet Tracer)<br>
+                           3. Android Inventory Management App (SQLite/CRUD)<br>
+                           4. Clothing Store App (Kotlin/Firebase)<br>
+                           5. Task Manager App (SQLite/RecyclerView)`,
+                error: `Command not found: "<span class="term-error">\${cmd}</span>". Type <span class="term-highlight">help</span> to list commands.`,
+                themeChanged: `<span class="term-success">Theme toggled successfully!</span>`
+            }
+        };
+
+        function processCommand(cmd) {
+            const currentLang = localStorage.getItem('language') || 'vi';
+            const t = terminalTranslations[currentLang] || terminalTranslations['en'];
+            const outputLine = document.createElement('p');
+            outputLine.className = 'term-info-line';
+
+            switch (cmd) {
+                case 'help':
+                    outputLine.innerHTML = t.help;
+                    terminalOutput.appendChild(outputLine);
+                    break;
+                case 'about':
+                    outputLine.innerHTML = t.about;
+                    terminalOutput.appendChild(outputLine);
+                    break;
+                case 'skills':
+                    outputLine.innerHTML = t.skills;
+                    terminalOutput.appendChild(outputLine);
+                    break;
+                case 'projects':
+                    outputLine.innerHTML = t.projects;
+                    terminalOutput.appendChild(outputLine);
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    break;
+                case 'theme':
+                    if (themeToggle) themeToggle.click();
+                    outputLine.innerHTML = t.themeChanged;
+                    terminalOutput.appendChild(outputLine);
+                    break;
+                case 'exit':
+                    closeTerminal();
+                    break;
+                default:
+                    outputLine.innerHTML = t.error.replace('${cmd}', escapeHTML(cmd));
+                    terminalOutput.appendChild(outputLine);
+                    break;
+            }
+        }
+    }
+
+    // --- 9. "DHC" Keyboard Easter Egg & Matrix Canvas Code Rain ---
+    let eggSequence = '';
+    const targetSequence = 'dhc';
+    
+    document.addEventListener('keyup', (e) => {
+        if (e.key && e.key.length === 1) {
+            eggSequence += e.key.toLowerCase();
+            if (eggSequence.length > targetSequence.length) {
+                eggSequence = eggSequence.substring(eggSequence.length - targetSequence.length);
+            }
+            
+            if (eggSequence === targetSequence) {
+                triggerEasterEgg();
+                eggSequence = '';
+            }
+        }
+    });
+
+    const matrixCanvas = document.getElementById('matrixCanvas');
+    let matrixInterval = null;
+
+    function triggerEasterEgg() {
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            logo.classList.add('easter-glitch');
+            setTimeout(() => logo.classList.remove('easter-glitch'), 3000);
+        }
+
+        startMatrixRain();
+
+        if (terminalModal) {
+            terminalModal.style.display = 'flex';
+            setTimeout(() => {
+                terminalModal.classList.add('open');
+                if (terminalOutput) {
+                    const eggLine = document.createElement('p');
+                    eggLine.className = 'term-info-line term-success';
+                    eggLine.style.fontWeight = 'bold';
+                    eggLine.innerHTML = `<br>🎉 SYSTEM OVERRIDE: EASTER EGG UNLOCKED! 🎉<br>
+                                         Initializing Matrix rain overlay protocols...<br>
+                                         Hello Đinh Hoàng Cước! Developer access granted.`;
+                    terminalOutput.appendChild(eggLine);
+                    if (terminalBody) {
+                        terminalBody.scrollTop = terminalBody.scrollHeight;
+                    }
+                }
+                if (terminalInput) terminalInput.focus();
+            }, 500);
+        }
+
+        setTimeout(() => {
+            stopMatrixRain();
+        }, 12000);
+    }
+
+    function startMatrixRain() {
+        if (!matrixCanvas) return;
+        matrixCanvas.classList.add('active');
+        const ctx = matrixCanvas.getContext('2d');
+        
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZDHC';
+        const alphabet = katakana.split('');
+
+        const fontSize = 16;
+        const columns = matrixCanvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        function drawMatrix() {
+            const isLight = document.body.classList.contains('light-theme');
+            ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.05)' : 'rgba(3, 7, 18, 0.05)';
+            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            ctx.fillStyle = isLight ? '#3b82f6' : '#a855f7';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+
+        if (matrixInterval) clearInterval(matrixInterval);
+        matrixInterval = setInterval(drawMatrix, 30);
+    }
+
+    function stopMatrixRain() {
+        if (matrixInterval) {
+            clearInterval(matrixInterval);
+            matrixInterval = null;
+        }
+        if (matrixCanvas) {
+            matrixCanvas.classList.remove('active');
+            const ctx = matrixCanvas.getContext('2d');
+            ctx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+        }
+    }
 });

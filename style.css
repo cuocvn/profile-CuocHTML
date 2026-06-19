@@ -1774,4 +1774,550 @@ body.light-theme .sun-icon {
     }
 }
 
+/* ==========================================================================
+   PREMIUM INTERACTIONS STYLING
+   ========================================================================== */
+
+/* 1. Page Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+    width: 250px;
+}
+
+.preloader-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.05em;
+    margin-bottom: 20px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.preloader-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.light-theme .preloader-bar-container {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.preloader-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    transition: width 0.3s ease;
+}
+
+/* 2. Scroll Progress */
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+}
+
+/* 3. Typing Animation Cursor */
+.typed-cursor {
+    opacity: 1;
+    animation: blink 0.8s infinite;
+    color: var(--accent-purple);
+    margin-left: 4px;
+    font-weight: 300;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 4. Mouse Spotlight on Cards */
+.project-card, .skill-card, .contact-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before, .skill-card::before, .contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(350px circle at var(--mouse-x, 0) px var(--mouse-y, 0) px, rgba(139, 92, 246, 0.08), transparent 80%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.light-theme .project-card::before, .light-theme .skill-card::before, .light-theme .contact-card::before {
+    background: radial-gradient(350px circle at var(--mouse-x, 0) px var(--mouse-y, 0) px, rgba(59, 130, 246, 0.05), transparent 80%);
+}
+
+.project-card:hover::before, .skill-card:hover::before, .contact-card:hover::before {
+    opacity: 1;
+}
+
+/* 5. Scroll Progress Line for Timeline */
+.timeline-line-progress {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+    height: 0;
+    transition: height 0.1s ease-out;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .timeline-line-progress {
+        left: 20px;
+    }
+}
+
+/* 6. Background Particles */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-purple) 0%, transparent 80%);
+    opacity: 0.12;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+.light-theme .particle {
+    opacity: 0.04;
+    background: radial-gradient(circle, var(--accent-blue) 0%, transparent 80%);
+}
+
+/* 7. Animated Modals General */
+.project-modal, .terminal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-backdrop, .terminal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 7, 18, 0.4);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.4s ease;
+    opacity: 0;
+}
+
+.light-theme .modal-backdrop, .light-theme .terminal-backdrop {
+    background: rgba(248, 250, 252, 0.4);
+}
+
+.project-modal .modal-content, .terminal-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh;
+    overflow-y: auto;
+    z-index: 10;
+    padding: 35px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal.open .modal-backdrop, .terminal-modal.open .terminal-backdrop {
+    opacity: 1;
+}
+
+.project-modal.open .modal-content, .terminal-modal.open .terminal-container {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+/* Modal Body elements */
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.modal-icon-wrapper {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--border-radius-md);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border: 1px solid var(--card-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-purple);
+}
+
+.modal-icon-wrapper i {
+    width: 26px;
+    height: 26px;
+}
+
+.modal-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.modal-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 2px;
+}
+
+.modal-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--card-border);
+    margin-bottom: 25px;
+}
+
+.light-theme .modal-meta-grid {
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.meta-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.meta-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.meta-value {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.meta-tags span {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: var(--border-radius-sm);
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    color: var(--text-primary);
+}
+
+.modal-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.modal-bullets {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-bullets li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    position: relative;
+    list-style-type: none;
+}
+
+.modal-bullets li::before {
+    content: '•';
+    position: absolute;
+    left: -15px;
+    color: var(--accent-purple);
+    font-weight: bold;
+}
+
+/* 8. Retro Cyberpunk Developer Terminal */
+.terminal-modal .terminal-container {
+    max-width: 600px;
+    background: rgba(15, 10, 25, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+    border-radius: 8px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.terminal-header {
+    background: rgba(10, 5, 20, 0.9);
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-close { background: #ef4444; }
+.dot-minimize { background: #eab308; }
+.dot-maximize { background: #22c55e; }
+
+.terminal-title {
+    color: rgba(139, 92, 246, 0.8);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.terminal-body {
+    padding: 20px;
+    height: 350px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-output {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.terminal-welcome {
+    color: #c084fc;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.terminal-welcome-sub {
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.term-highlight {
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+.term-cmd {
+    color: #f472b6;
+    font-weight: bold;
+}
+
+.term-error {
+    color: #f87171;
+}
+
+.term-success {
+    color: #4ade80;
+}
+
+.term-info-line {
+    margin-bottom: 6px;
+}
+
+.terminal-form {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+    padding-top: 10px;
+}
+
+.terminal-prompt {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: #f472b6;
+    white-space: nowrap;
+}
+
+.terminal-input {
+    flex-grow: 1;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 0.85rem !important;
+    color: #38bdf8 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.terminal-input:focus {
+    box-shadow: none !important;
+}
+
+/* Terminal Toggle button in Nav actions */
+.terminal-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-fast);
+}
+
+.terminal-toggle-btn:hover {
+    color: var(--text-primary);
+    background: var(--card-bg);
+}
+
+.terminal-toggle-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* 9. Keyboard matrix rain effect */
+.matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.matrix-canvas.active {
+    opacity: 0.45;
+}
+
+.light-theme .matrix-canvas.active {
+    opacity: 0.12;
+}
+
+/* Custom interactive animation styling helper */
+.easter-glitch {
+    animation: glitch 0.3s linear infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
 

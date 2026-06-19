@@ -24,6 +24,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
+    <!-- Page Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">DHC<span class="logo-dot">.</span></div>
+            <div class="preloader-bar-container">
+                <div class="preloader-bar" id="preloaderBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
     <!-- Ambient light glow element -->
     <div class="ambient-glow" id="ambientGlow"></div>
 
@@ -58,6 +73,10 @@
                     </div>
                 </div>
 
+                <button class="terminal-toggle-btn" id="terminalToggleBtn" aria-label="Toggle Developer Terminal">
+                    <i data-lucide="terminal"></i>
+                </button>
+
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">
                     <i data-lucide="moon" class="toggle-icon moon-icon"></i>
                     <i data-lucide="sun" class="toggle-icon sun-icon"></i>
@@ -84,21 +103,21 @@
                     Xin chào, tôi là<br>
                     <span class="text-gradient">Đinh Hoàng Cước</span>
                 </h1>
-                <h2 class="hero-subtitle" data-i18n="hero-subtitle">Mobile Application Development Student</h2>
+                <h2 class="hero-subtitle"><span id="typingText" data-i18n="hero-subtitle">Mobile Application Development Student</span><span class="typed-cursor">|</span></h2>
                 <p class="hero-description" data-i18n="hero-desc">
                     Sinh viên năm cuối ngành Công nghệ thông tin tại Cao đẳng Công nghệ Thủ Đức. Tập trung học tập và thực hành phát triển ứng dụng di động trên nền tảng Android (Kotlin/Java) và Flutter.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number">2005</span>
+                        <span class="stat-number" data-target="2005" data-suffix="">0</span>
                         <span class="stat-label" data-i18n="hero-stat-birth">Năm sinh</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">7+</span>
+                        <span class="stat-number" data-target="7" data-suffix="+">0</span>
                         <span class="stat-label" data-i18n="hero-stat-projects">Dự án học tập</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">0937...</span>
+                        <span class="stat-number" data-target="937" data-prefix="0" data-suffix="...">0</span>
                         <span class="stat-label" data-i18n="hero-stat-hotline">Hotline</span>
                     </div>
                 </div>
@@ -712,6 +731,68 @@
             <button class="btn btn-primary" id="modalCloseBtn" data-i18n="modal-success-close">Đóng</button>
         </div>
     </div>
+
+    <!-- Project Details Modal -->
+    <div class="project-modal" id="projectModal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <button class="modal-close" id="projectModalCloseBtn" aria-label="Close Modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <div class="modal-icon-wrapper" id="modalProjIcon"></div>
+                    <div class="modal-header-text">
+                        <span class="modal-subtitle" data-i18n="modal-project-detail">Project Detail</span>
+                        <h3 class="modal-title" id="modalProjTitle">Project Name</h3>
+                    </div>
+                </div>
+                <div class="modal-meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label" data-i18n="modal-project-role">Role:</span>
+                        <span class="meta-value" id="modalProjRole">Leader</span>
+                     </div>
+                     <div class="meta-item">
+                         <span class="meta-label" data-i18n="modal-project-tech">Technologies:</span>
+                         <div class="meta-tags" id="modalProjTech"></div>
+                     </div>
+                 </div>
+                 <div class="modal-details">
+                     <p class="modal-desc" id="modalProjDesc">Detailed description goes here...</p>
+                     <ul class="modal-bullets" id="modalProjBullets"></ul>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <!-- Developer Mode Terminal -->
+     <div class="terminal-modal" id="terminalModal" style="display: none;">
+         <div class="terminal-backdrop"></div>
+         <div class="terminal-container glass-card">
+             <div class="terminal-header">
+                 <div class="terminal-dots">
+                     <span class="terminal-dot dot-close"></span>
+                     <span class="terminal-dot dot-minimize"></span>
+                     <span class="terminal-dot dot-maximize"></span>
+                 </div>
+                 <span class="terminal-title">dhc@developer-system:~</span>
+             </div>
+             <div class="terminal-body" id="terminalBody">
+                 <div class="terminal-output" id="terminalOutput">
+                     <p class="terminal-welcome">DHC Developer Mode Terminal v1.0.0</p>
+                     <p class="terminal-welcome-sub">Type <span class="term-highlight">help</span> to view all available commands.</p>
+                 </div>
+                 <form class="terminal-form" id="terminalForm">
+                     <span class="terminal-prompt">dhc@dev:~$&nbsp;</span>
+                     <input type="text" class="terminal-input" id="terminalInput" autofocus autocomplete="off" spellcheck="false">
+                 </form>
+             </div>
+         </div>
+     </div>
+
+     <!-- Background Particles -->
+     <div class="particles-container" id="particlesContainer"></div>
+
+     <!-- Matrix Background Effect -->
+     <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
 
     <!-- EmailJS SDK CDN -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
